@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Server port="-1" shutdown="SHUTDOWN">
+    <Service name="Catalina">
+        <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
+          maxThreads="50" minSpareThreads="20" />
+
+<Connector port="${HTTP_PORT}" protocol="org.apache.coyote.http11.Http11NioProtocol"
+           executor="tomcatThreadPool"
+           acceptCount="100"
+           acceptorThreadCount="8"
+           disableUploadTimeout="true"
+           enableLookups="false"
+           connectionTimeout="20000"
+           redirectPort="9463" URIEncoding="UTF-8"/>
+
+<Engine name="Catalina" defaultHost="localhost">
+<Host name="localhost"  appBase="webapps"
+      unpackWARs="true" autoDeploy="true">
+    <Context docBase="${DEPLOY_PATH}" path="" debug="0"  reloadable="true"/>
+    <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+           prefix="localhost_access_log." suffix=".txt"
+           pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+</Host>
+</Engine>
+        </Service>
+        </Server>
